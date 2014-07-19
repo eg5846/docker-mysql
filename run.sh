@@ -9,7 +9,10 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
     echo "=> Done!"
 
     if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
+        echo "MYSQL_ROOT_PASSWORD is not set, use default value 'root'"
         MYSQL_ROOT_PASSWORD=root
+    else
+        echo "MYSQL_ROOT_PASSWORD is set to '$MYSQL_ROOT_PASSWORD'" 
     fi
 
 	cat > /tmp/mysql-first-time.sql <<-EOSQL
