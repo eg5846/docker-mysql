@@ -24,5 +24,5 @@ If MYSQL_ROOT_PASSWORD is not set, default value 'root' is used.
 
 ## Connect to database
 ```
-sudo docker run --rm -it --link mysqlsrv:mysql eg5846/mysql-docker 
+sudo docker run --rm -it --link mysqlsrv:mysql eg5846/mysql-docker /bin/bash -c 'mysql -u root -p $MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -P $MYSQL_PORT_3306_TCP_PORT'
 ```
