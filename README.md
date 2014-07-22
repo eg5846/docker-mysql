@@ -4,7 +4,7 @@
 ```
 git clone git@github.com:eg5846/mysql-docker.git
 cd mysql-docker
-sudo docker build -t eg5846/nginx-mysql .
+sudo docker build -t eg5846/mysql-docker .
 
 # Pushing image to registry.hub.docker.com is no longer required!!!
 # Image build is automatically initiated after pushing commits of project to github.com
