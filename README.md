@@ -1,30 +1,27 @@
-# mysql docker image
-**DEPRECATED**  
-This docker image is still in use by misp-docker!!!
+# docker-mysql 
+Dockerfile for mysql docker image
 
 ## Build mysql docker image
 ```
-git clone git@github.com:eg5846/mysql-docker.git
-cd mysql-docker
-sudo docker build -t eg5846/mysql-docker .
-
-# Pushing image to registry.hub.docker.com is no longer required!!!
-# Image build is automatically initiated after pushing commits of project to github.com
-# sudo docker push eg5846/mysql-docker
+git clone git@github.com:eg5846/docker-mysql.git
+cd docker-mysql
+sudo docker pull eg5846/ubuntu:xenial
+sudo docker build -t eg5846/mysql .
+sudo docker push eg5846/mysql
 ```
 
-## Run mysql docker image (e.g. as mysqlsrv)
+## Run mysql docker container
 ```
 # With database files stored inside the docker container
-sudo docker run -d -P -e MYSQL_ROOT_PASSWORD=root --name mysqlsrv eg5846/mysql-docker
+sudo docker run -d --restart=always -P -e MYSQL_ROOT_PASSWORD=root --name mysql eg5846/mysql
 
 # With database files stored outside the docker container on the docker host
-mkdir -p /export/docker/mysqlsrv/mysql
-sudo docker run -d -P -e MYSQL_ROOT_PASSWORD=root -v /export/docker/mysqlsrv/mysql:/var/lib/mysql --name mysqlsrv eg5846/mysql-docker
+mkdir -p /export/docker/mysql/mysql
+sudo docker run -d --restart=always -P -e MYSQL_ROOT_PASSWORD=root -v /export/docker/mysql/mysql:/var/lib/mysql --name mysql eg5846/mysql
 ```
 If MYSQL_ROOT_PASSWORD is not set, default value 'root' is used.
 
 ## Connect to database
 ```
-sudo docker run --rm -it --link mysqlsrv:mysql eg5846/mysql-docker /bin/bash -c 'mysql -u root -p $MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -P $MYSQL_PORT_3306_TCP_PORT'
+sudo docker run --rm -it --link mysql:mysql eg5846/mysql /bin/bash -c 'mysql -u root -p $MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -P $MYSQL_PORT_3306_TCP_PORT'
 ```
