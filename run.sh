@@ -16,8 +16,8 @@ if [[ ! -d $VOLUME_HOME/mysql ]]; then
     fi
 
 	cat > /tmp/mysql-first-time.sql <<-EOSQL
-		UPDATE mysql.user SET host = "%", password = PASSWORD("${MYSQL_ROOT_PASSWORD}") WHERE user = "root" LIMIT 1 ;
-		DELETE FROM mysql.user WHERE user != "root" OR host != "%" ;
+		ALTER USER "root"@"localhost" IDENTIFIED BY "${MYSQL_ROOT_PASSWORD}" ;
+		UPDATE mysql.user SET host = "%" WHERE user = "root" LIMIT 1 ;
 		DROP DATABASE IF EXISTS test ;
 		FLUSH PRIVILEGES ;
 	EOSQL
