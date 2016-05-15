@@ -5,7 +5,7 @@ VOLUME_HOME="/var/lib/mysql"
 if [[ ! -d $VOLUME_HOME/mysql ]]; then
     echo "=> An empty or uninitialized MySQL volume is detected in $VOLUME_HOME"
     echo "=> Installing MySQL database ..."
-    mysql_install_db --datadir=$VOLUME_HOME > /dev/null 2>&1
+    mysqld --initialize --datadir=$VOLUME_HOME > /dev/null 2>&1
     echo "=> Done!"
 
     if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
