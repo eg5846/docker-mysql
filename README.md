@@ -15,9 +15,13 @@ sudo docker push eg5846/mysql
 # With database files stored inside the docker container
 sudo docker run -d --restart=always -P -e MYSQL_ROOT_PASSWORD=root --name mysql eg5846/mysql
 
-# With database files stored outside the docker container on the docker host
+# With database files stored outside the docker container on the docker host (deprecated)
 mkdir -p /export/docker/mysql/mysql
 sudo docker run -d --restart=always -P -e MYSQL_ROOT_PASSWORD=root -v /export/docker/mysql/mysql:/var/lib/mysql --name mysql eg5846/mysql
+
+# With database files stored outside the docker container in a volume container
+sudo docker create --name mysql_vol eg5846/mysql /bin/false
+sudo docker run -d --restart=always -P -e MYSQL_ROOT_PASSWORD=root --volumes-from=mysql_vol --name mysql eg5846/mysql
 ```
 If MYSQL_ROOT_PASSWORD is not set, default value 'root' is used.
 
