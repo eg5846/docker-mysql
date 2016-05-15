@@ -10,8 +10,7 @@ RUN \
 RUN rm -rf /var/lib/mysql/*
 
 # Add MySQL configuration
-ADD my.cnf /etc/mysql/conf.d/my.cnf
-ADD mysqld_charset.cnf /etc/mysql/conf.d/mysqld_charset.cnf
+ADD mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Add MySQL scripts
 ADD run.sh /run.sh
