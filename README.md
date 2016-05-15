@@ -1,4 +1,6 @@
 # mysql docker image
+**DEPRECATED**  
+This docker image is still in use by misp-docker!!!
 
 ## Build mysql docker image
 ```
