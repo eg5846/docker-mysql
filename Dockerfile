@@ -1,23 +1,5 @@
-FROM ubuntu:trusty
+FROM eg5846/ubuntu:xenial
 MAINTAINER Andreas Egner <andreas.egner@web.de>
-
-# Set environment variables
-ENV DEBIAN_FRONTEND noninteractive
-
-# Modify inputrc
-RUN \
-  sed -i 's/^#\s*\(.*history-search-backward\)$/\1/g' /etc/inputrc && \
-  sed -i 's/^#\s*\(.*history-search-forward\)$/\1/g' /etc/inputrc
-
-# Replace sources.list for apt
-ADD sources.list /etc/apt/sources.list
-
-# Upgrade system
-RUN \
-  apt-get update && \
-  apt-get dist-upgrade -y --no-install-recommends && \
-  apt-get autoremove -y && \
-  apt-get clean
 
 # Install packages
 RUN \
